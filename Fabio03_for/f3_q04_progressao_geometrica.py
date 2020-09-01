@@ -1,11 +1,10 @@
 def main():
-    ini = int(input('Digite o termo inicial da PA: '))
-    r = int(input('Digite a razão: '))
-    lim = int(input('Digite o limite: '))
+    a = int(input('Digite o valor inicial da PG: '))
+    lim = int(input('Digite o valor final: '))
+    q = int(input('Digite a razão: '))
 
-    for i in range(ini, lim):
-        termo = ini * r**(i - 1)
-        print(termo, end=' ')
-
+    while a < lim:
+        print(a, end=' ')
+        a *= q
 
 main()
