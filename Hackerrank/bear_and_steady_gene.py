@@ -10,20 +10,59 @@ import sys
 
 # Complete the steadyGene function below.
 def steadyGene(gene):
-    tam = len(gene)//4
-    q_G = q_A = q_C = q_T = 0
-    for letra in gene:
-        if letra == 'G':
-            q_G += 1
-        if letra == 'A':
-            q_A += 1
-        if letra == 'C':
-            q_C += 1
-        if letra == 'T':
-            q_T += 1
-    print(f'G = {q_G}, A={q_A}, C={q_C}, T={q_T}')
-    return q_A
+    base = 'GACT'
+    tam = n//4
+    sub = ''
+    if eh_estavel(gene):
+        print('gene estável')
+    else:
+        sub = substring(gene)
+        for c in range(len(gene)-len(sub)):
+            newgene = (gene[:c] + sub + gene[c+len(sub):]).strip().upper()
+            if eh_estavel(newgene):
+                #print(f'gene estavel: {newgene}')
+                return(len(sub))
+        for letra in base:
+            newsub = sub + letra
+            for c in range(len(gene)-len(newsub)):
+                newgene = (gene[:c] + newsub + gene[c+len(newsub):]).strip().upper()
+                if eh_estavel(newgene):
+                    #print(f'gene estavel: {newgene}')
+                    return(len(newsub))
+        
+    return 'gene não estabilizado'
 
+
+def substring(palavra):
+    base = 'GACT'
+    tam = len(palavra) // 4
+    sub = ''
+    for letra in base:
+            q = quantas_letras(letra, palavra)
+            if q < tam:
+                sub += (tam - q) * letra
+    return sub
+
+
+def eh_estavel(palavra):
+    #Avalia se o gene é estável
+    tam = len(palavra) // 4
+    base = 'GACT'
+    for letra in base:
+        if quantas_letras(letra, palavra) != tam:
+            return False
+    return True
+
+
+def quantas_letras(letra, palavra): 
+    #Retorna a quantidade de vezes que a letra aparece na palavra
+    cont = 0
+    for l in palavra:
+        if l == letra:
+            cont += 1
+    return cont
+
+    
 
 if __name__ == '__main__':
     #fptr = open(os.environ['OUTPUT_PATH'], 'w')
