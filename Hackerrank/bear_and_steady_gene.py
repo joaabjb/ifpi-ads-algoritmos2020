@@ -20,7 +20,7 @@ def steadyGene(gene):
         for c in range(len(gene)-len(sub)):
             newgene = (gene[:c] + sub + gene[c+len(sub):]).strip().upper()
             if eh_estavel(newgene):
-                #print(f'gene estavel: {newgene}')
+                print(f'gene estavel: {newgene}')
                 return(len(sub))
         for letra in base:
             newsub = sub + letra
@@ -29,9 +29,8 @@ def steadyGene(gene):
                 if eh_estavel(newgene):
                     #print(f'gene estavel: {newgene}')
                     return(len(newsub))
-        
-    return 'gene não estabilizado'
-
+    #return 'gene não estabilizado'
+    return 0
 
 def substring(palavra):
     base = 'GACT'
